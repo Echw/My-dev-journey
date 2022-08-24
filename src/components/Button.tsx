@@ -4,10 +4,15 @@ import styled from 'styled-components';
 interface ButtonProps {
   btn: string;
   onClick?: () => void;
+  className?: string;
 }
 
 const Button = (props: ButtonProps) => {
-  return <Btn onClick={props.onClick}>{props.btn}</Btn>;
+  return (
+    <Btn className={props.className} onClick={props.onClick}>
+      {props.btn}
+    </Btn>
+  );
 };
 
 const Btn = styled.button`

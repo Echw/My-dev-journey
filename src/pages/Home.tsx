@@ -9,8 +9,8 @@ const Home = () => {
       <Title name="My Dev Journey" />
       <LinkButton btn="FormApp" to="/form" />
       <LinkButton btn="ToDo List" to="/todo" />
-      {/* <LinkButton btn="licznik kliknięć " />
-      <LinkButton btn="wyszukiwarka" />
+      <LinkButton btn="Click Counter" to="/counter" />
+      {/* <LinkButton btn="wyszukiwarka" />
          <LinkButton btn="5" /> */}
     </Wrapper>
   );
