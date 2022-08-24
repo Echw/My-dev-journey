@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 interface LinkButtonProps {
   btn: string;
+  to: string;
 }
 
 const LinkButton = (props: LinkButtonProps) => {
-  return <Btn to="/form">{props.btn}</Btn>;
+  return <Btn to={props.to}>{props.btn}</Btn>;
 };
 
 const Btn = styled(Link)`

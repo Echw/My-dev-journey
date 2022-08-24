@@ -7,15 +7,11 @@ const Home = () => {
   return (
     <Wrapper>
       <Title name="My Dev Journey" />
-      <LinkButton btn="FormApp" />
-      {/* formularz */}
-      <LinkButton btn="2" />
-      {/* todolist */}
-      <LinkButton btn="3" />
-      {/* licznik kliknięć */}
-      <LinkButton btn="4" />
-      {/* wyszukiwarka */}
-      <LinkButton btn="5" />
+      <LinkButton btn="FormApp" to="/form" />
+      <LinkButton btn="ToDo List" to="/todo" />
+      {/* <LinkButton btn="licznik kliknięć " />
+      <LinkButton btn="wyszukiwarka" />
+         <LinkButton btn="5" /> */}
     </Wrapper>
   );
 };
