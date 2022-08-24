@@ -59,9 +59,7 @@ const ToDoList = () => {
               ))}
             </div>
           ) : (
-            <div className="no-todos">
-              Looks like you&apos;re absolutely free today!
-            </div>
+            <div>Looks like you&apos;re absolutely free today!</div>
           )}
         </TodoList>
         <TodoResult>
@@ -69,7 +67,7 @@ const ToDoList = () => {
           {calculateChecked()}
         </TodoResult>
         <TodoForm>
-          <form className="todo-form" onSubmit={handleAddTodo}>
+          <form onSubmit={handleAddTodo}>
             <input
               placeholder="Enter new task"
               value={task}

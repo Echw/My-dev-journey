@@ -2,16 +2,15 @@ import React from 'react';
 import LinkButton from '../components/LinkButton';
 import styled from 'styled-components';
 import Title from '../components/Title';
+import { ROUTES } from './../utils/constants/routes.constant';
 
 const Home = () => {
   return (
     <Wrapper>
       <Title name="My Dev Journey" />
-      <LinkButton btn="FormApp" to="/form" />
-      <LinkButton btn="ToDo List" to="/todo" />
-      <LinkButton btn="Click Counter" to="/counter" />
-      {/* <LinkButton btn="wyszukiwarka" />
-         <LinkButton btn="5" /> */}
+      {ROUTES.map((route) => (
+        <LinkButton btn={route.name} to={route.path} key={route.id} />
+      ))}
     </Wrapper>
   );
 };

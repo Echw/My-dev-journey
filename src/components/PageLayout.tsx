@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styled from 'styled-components';
+import Sidebar from './Sidebar';
 
 interface PageLayoutProps {
   children: React.ReactNode;
 }
 
 const PageLayout = (props: PageLayoutProps) => {
+  const [open, setOpen] = useState(false);
+
+  const onCloseHandler = () => {
+    setOpen(false);
+  };
+
+  const onOpenHandler = () => {
+    setOpen(true);
+  };
   return (
     <Wrapper>
-      <Burger>
+      <Burger onClick={onOpenHandler}>
         <GiHamburgerMenu />
       </Burger>
       {props.children}
+      <Sidebar onClose={onCloseHandler} open={open}></Sidebar>
     </Wrapper>
   );
 };
