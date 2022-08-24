@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Checkbox } from '../components/Checkbox';
 import Title from './../components/Title';
 import Button from '../components/Button';
+import PageLayout from '../components/PageLayout';
 
 const ToDoList = () => {
   const [todos, setTodos] = React.useState(todosTemplate);
@@ -39,46 +40,48 @@ const ToDoList = () => {
   };
 
   return (
-    <Wrapper>
-      <Title name="ToDo List" />
+    <PageLayout>
+      <Wrapper>
+        <Title name="ToDo List" />
 
-      <TodoList>
-        <span>Things to do:</span>
-        {todos.length ? (
-          <div>
-            {todos.map((todoItem) => (
-              <Checkbox
-                key={todoItem.id}
-                label={todoItem.label}
-                checked={todoItem.checked}
-                onClick={() => toggleCheck(todoItem.id)}
-                onDelete={() => handleDelete(todoItem.id)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="no-todos">
-            Looks like you&apos;re absolutely free today!
-          </div>
-        )}
-      </TodoList>
-      <TodoResult>
-        Done:
-        {calculateChecked()}
-      </TodoResult>
-      <TodoForm>
-        <form className="todo-form" onSubmit={handleAddTodo}>
-          <input
-            placeholder="Enter new task"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-          />
-          <button type="button" onClick={handleAddTodo}>
-            Add task
-          </button>
-        </form>
-      </TodoForm>
-    </Wrapper>
+        <TodoList>
+          <span>Things to do:</span>
+          {todos.length ? (
+            <div>
+              {todos.map((todoItem) => (
+                <Checkbox
+                  key={todoItem.id}
+                  label={todoItem.label}
+                  checked={todoItem.checked}
+                  onClick={() => toggleCheck(todoItem.id)}
+                  onDelete={() => handleDelete(todoItem.id)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="no-todos">
+              Looks like you&apos;re absolutely free today!
+            </div>
+          )}
+        </TodoList>
+        <TodoResult>
+          Done:
+          {calculateChecked()}
+        </TodoResult>
+        <TodoForm>
+          <form className="todo-form" onSubmit={handleAddTodo}>
+            <input
+              placeholder="Enter new task"
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+            />
+            <button type="button" onClick={handleAddTodo}>
+              Add task
+            </button>
+          </form>
+        </TodoForm>
+      </Wrapper>
+    </PageLayout>
   );
 };
 

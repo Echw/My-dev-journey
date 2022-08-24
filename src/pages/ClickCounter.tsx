@@ -1,7 +1,7 @@
-import { count } from 'console';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../components/Button';
+import PageLayout from '../components/PageLayout';
 import Title from '../components/Title';
 
 const ClickCounter = () => {
@@ -15,14 +15,16 @@ const ClickCounter = () => {
   };
 
   return (
-    <Wrapper>
-      <Title name="Click Counter"></Title>
-      <div>
-        <Btn btn="-" onClick={decrease} />
-        <h2>{counter}</h2>
-        <Btn btn="+" onClick={increase} />
-      </div>
-    </Wrapper>
+    <PageLayout>
+      <Wrapper>
+        <Title name="Click Counter" />
+        <div>
+          <Btn btn="-" onClick={decrease} />
+          <h2>{counter}</h2>
+          <Btn btn="+" onClick={increase} />
+        </div>
+      </Wrapper>
+    </PageLayout>
   );
 };
 

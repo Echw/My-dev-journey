@@ -2,6 +2,7 @@ import React, { FormEventHandler, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../components/Button';
 import Modal from '../components/Modal';
+import PageLayout from '../components/PageLayout';
 import Title from '../components/Title';
 
 const FormPage = () => {
@@ -29,54 +30,56 @@ const FormPage = () => {
   };
 
   return (
-    <Wrapper>
-      <Title name="FormApp" />
-      <div>
-        <Button btn="Sign Up" onClick={() => setIsSingUp(true)} />
-        <Button btn="Sign In" onClick={() => setIsSingUp(false)} />
-      </div>
-      <FormWrapper>
-        {isSignUp === true ? (
-          <SignUp onSubmit={formSubmitHandler}>
-            <h2>Sign Up </h2>
-            <input
-              type="text"
-              placeholder="Name"
-              onChange={nameInputChangeHandler}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              onChange={emailInputChangeHandler}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={passwordInputChangeHandler}
-            />
-            <Button btn="Sign Up" />
-          </SignUp>
-        ) : (
-          <SignIn onSubmit={formSubmitHandler}>
-            <h2>Sign In </h2>
-            <input
-              type="email"
-              placeholder="Email"
-              onChange={emailInputChangeHandler}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={passwordInputChangeHandler}
-            />
-            <Button btn="Sign In" />
-          </SignIn>
-        )}
-      </FormWrapper>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <>Thank you for sign up {enteredName}</>
-      </Modal>
-    </Wrapper>
+    <PageLayout>
+      <Wrapper>
+        <Title name="FormApp" />
+        <div>
+          <Button btn="Sign Up" onClick={() => setIsSingUp(true)} />
+          <Button btn="Sign In" onClick={() => setIsSingUp(false)} />
+        </div>
+        <FormWrapper>
+          {isSignUp === true ? (
+            <SignUp onSubmit={formSubmitHandler}>
+              <h2>Sign Up </h2>
+              <input
+                type="text"
+                placeholder="Name"
+                onChange={nameInputChangeHandler}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                onChange={emailInputChangeHandler}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={passwordInputChangeHandler}
+              />
+              <Button btn="Sign Up" />
+            </SignUp>
+          ) : (
+            <SignIn onSubmit={formSubmitHandler}>
+              <h2>Sign In </h2>
+              <input
+                type="email"
+                placeholder="Email"
+                onChange={emailInputChangeHandler}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={passwordInputChangeHandler}
+              />
+              <Button btn="Sign In" />
+            </SignIn>
+          )}
+        </FormWrapper>
+        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+          <>Thank you for sign up {enteredName}</>
+        </Modal>
+      </Wrapper>{' '}
+    </PageLayout>
   );
 };
 const Wrapper = styled.div`
