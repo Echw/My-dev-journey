@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './../components/Button';
+import LinkButton from '../components/LinkButton';
 import styled from 'styled-components';
 import Title from '../components/Title';
 
@@ -7,15 +7,15 @@ const Home = () => {
   return (
     <Wrapper>
       <Title name="My Dev Journey" />
-      <Button btn="FormApp" />
+      <LinkButton btn="FormApp" />
       {/* formularz */}
-      <Button btn="2" />
+      <LinkButton btn="2" />
       {/* todolist */}
-      <Button btn="3" />
+      <LinkButton btn="3" />
       {/* licznik kliknięć */}
-      <Button btn="4" />
+      <LinkButton btn="4" />
       {/* wyszukiwarka */}
-      <Button btn="5" />
+      <LinkButton btn="5" />
     </Wrapper>
   );
 };

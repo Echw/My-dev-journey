@@ -1,18 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface ButtonProps {
+interface LinkButtonProps {
   btn: string;
-  onClick?: () => void;
 }
 
-const Button = (props: ButtonProps) => {
-  return <Btn onClick={props.onClick}>{props.btn}</Btn>;
+const LinkButton = (props: LinkButtonProps) => {
+  return <Btn to="/form">{props.btn}</Btn>;
 };
 
-const Btn = styled.button`
+const Btn = styled(Link)`
+  width: 30rem;
   margin: 1rem;
-  padding: 1rem 3rem;
+  padding: 1.5rem;
   border-radius: 3rem;
   border: 0.3rem solid #286fc7;
   background: transparent;
@@ -31,4 +32,4 @@ const Btn = styled.button`
   }
 `;
 
-export default Button;
+export default LinkButton;
