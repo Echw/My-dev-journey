@@ -3,4 +3,5 @@ export const ROUTES = [
   { id: 2, path: '/todo', name: 'ToDo List' },
   { id: 3, path: '/counter', name: 'Click Counter' },
   { id: 4, path: '/photos', name: 'Photo Search' },
+  { id: 5, path: '/hp', name: 'Harry Potter Search' },
 ];
