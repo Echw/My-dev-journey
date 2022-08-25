@@ -12,28 +12,79 @@ type Photo = {
 
 const PhotoSearch = () => {
   const [state, setState] = useState<Photo[]>([]);
+  const [enteredSearch, setEnteredSearch] = useState('');
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
+  const url = 'https://api.pexels.com/v1/curated?page=1&per_page=15';
+  const auth = {
+    headers: {
+      Authorization:
+        ' 563492ad6f917000010000015a6a84e181aa4f3caff12a5a2208fc66',
+    },
+  };
+
+  const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEnteredSearch(event.currentTarget.value);
+  };
+
+  const searchSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (enteredSearch.trim() === '') {
+      return;
+    }
+
     axios
-      .get('https://api.pexels.com/v1/curated?page=1&per_page=15', {
-        headers: {
-          Authorization:
-            ' 563492ad6f917000010000015a6a84e181aa4f3caff12a5a2208fc66',
-        },
-      })
+      .get(
+        `https://api.pexels.com/v1/search?query=${enteredSearch}&per_page=15&page=${1}`,
+        auth
+      )
       .then((res) => {
         const persons = res.data;
+
         setState(persons.photos);
-        console.log(persons);
-      });
+      })
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    axios.get(url, auth).then((res) => {
+      const persons = res.data;
+      setState(persons.photos);
+    });
   }, []);
+
+  const loadMore = () => {
+    let newUrl = '';
+    if (enteredSearch.trim() === '') {
+      newUrl = `https://api.pexels.com/v1/curated?page=1&per_page=15&page=${
+        page + 1
+      }`;
+    } else {
+      newUrl = `https://api.pexels.com/v1/search?query=${enteredSearch}&per_page=15&page=${
+        page + 1
+      }`;
+    }
+
+    axios.get(newUrl, auth).then((res) => {
+      const persons = res.data;
+      setState((prevValue) => [...prevValue, ...persons.photos]);
+    });
+    setPage((prevValue) => prevValue + 1);
+  };
 
   return (
     <PageLayout>
       <Header>
         <Title name="Photo Search"></Title>
-        <form>
-          <input type="text" name="search" placeholder="Search..." />
+        <form onSubmit={searchSubmitHandler}>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search..."
+            value={enteredSearch}
+            onChange={searchChangeHandler}
+          />
           <Btn type="submit">Search</Btn>
         </form>
       </Header>
@@ -51,7 +102,7 @@ const PhotoSearch = () => {
         </Gallery>
       </main>
       <MoreWrapper>
-        <Btn>More</Btn>
+        <Btn onClick={loadMore}>More</Btn>
       </MoreWrapper>
     </PageLayout>
   );
@@ -115,7 +166,8 @@ const GalleryInfo = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: gray;
+  color: #286fc7;
+  font-weight: 600;
   padding: 0.5rem 0rem;
   div {
     display: flex;
@@ -125,7 +177,9 @@ const GalleryInfo = styled.div`
     width: 300px;
   }
 
-  a {
-    color: gray;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
