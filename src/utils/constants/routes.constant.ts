@@ -4,4 +4,5 @@ export const ROUTES = [
   { id: 3, path: '/counter', name: 'Click Counter' },
   { id: 4, path: '/photos', name: 'Photo Search' },
   { id: 5, path: '/hp', name: 'Harry Potter Search' },
+  { id: 6, path: '/calculator', name: 'Calculator' },
 ];

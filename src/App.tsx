@@ -5,6 +5,7 @@ import ToDoList from './pages/ToDoList';
 import ClickCounter from './pages/ClickCounter';
 import PhotoSearch from './pages/PhotoSearch';
 import HarryPotterAPI from './pages/HarryPotterAPI';
+import Calculator from './pages/Calculator';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/counter" element={<ClickCounter />} />
         <Route path="/photos" element={<PhotoSearch />} />
         <Route path="/hp" element={<HarryPotterAPI />} />
+        <Route path="/calculator" element={<Calculator />} />
       </Routes>
     </div>
   );
