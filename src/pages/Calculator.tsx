@@ -1,10 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PageLayout from '../components/PageLayout';
 import Title from '../components/Title';
 import { FaBackspace } from 'react-icons/fa';
 
 const Calculator = () => {
+  const [actualValue, setActualValue] = useState('0');
+  const [action, setAction] = useState('');
+
+  const onDigitBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const value = event.currentTarget.textContent;
+    if (actualValue === '0') {
+      setActualValue(value!);
+    } else {
+      setActualValue((prevValue) => prevValue + value);
+    }
+  };
+
+  const onActionBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const value = event.currentTarget.textContent;
+    setAction(value!);
+    setActualValue(actualValue + value);
+  };
+
+  const onEqualBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const numbers = actualValue.split(action);
+    const firstNumber = parseInt(numbers[0]);
+    const secondNumber = parseInt(numbers[1]);
+    let result = 0;
+    if (action === '+') {
+      result = firstNumber + secondNumber;
+    } else if (action === '-') {
+      result = firstNumber - secondNumber;
+    } else if (action === '/') {
+      result = firstNumber / secondNumber;
+    } else if (action === 'x') {
+      result = firstNumber * secondNumber;
+    } else if (action === '%') {
+      result = (100 * secondNumber) / firstNumber;
+    }
+    setActualValue(result.toString());
+  };
+
+  const onClearBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setActualValue('0');
+  };
+
+  const onDeleteBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const newValue = actualValue.slice(0, -1);
+    if (newValue === '') {
+      setActualValue('0');
+    } else {
+      setActualValue(newValue);
+    }
+  };
+
   return (
     <PageLayout>
       <Wrapper>
@@ -12,35 +62,41 @@ const Calculator = () => {
         <CalculatorWrapper>
           <Panel>
             <Result>
-              <input type="text" name="display" id="display" disabled />
+              <input
+                type="text"
+                name="display"
+                id="display"
+                disabled
+                value={actualValue}
+              />
             </Result>
             <Buttons>
               <BtnWrapper1>
-                <button>C</button>
-                <button>/</button>
-                <button>x</button>
-                <DeleteBtnWrapper>
+                <button onClick={onClearBtnClick}>C</button>
+                <button onClick={onActionBtnClick}>/</button>
+                <button onClick={onActionBtnClick}>x</button>
+                <DeleteBtnWrapper onClick={onDeleteBtnClick}>
                   <DeleteBtn />
                 </DeleteBtnWrapper>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>-</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>+</button>
+                <button onClick={onDigitBtnClick}>1</button>
+                <button onClick={onDigitBtnClick}>2</button>
+                <button onClick={onDigitBtnClick}>3</button>
+                <button onClick={onActionBtnClick}>-</button>
+                <button onClick={onDigitBtnClick}>4</button>
+                <button onClick={onDigitBtnClick}>5</button>
+                <button onClick={onDigitBtnClick}>6</button>
+                <button onClick={onActionBtnClick}>+</button>
               </BtnWrapper1>
               <BtnWrapper2>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>%</button>
-                <button>0</button>
+                <button onClick={onDigitBtnClick}>7</button>
+                <button onClick={onDigitBtnClick}>8</button>
+                <button onClick={onDigitBtnClick}>9</button>
+                <button onClick={onActionBtnClick}>%</button>
+                <button onClick={onDigitBtnClick}>0</button>
                 <button>.</button>
               </BtnWrapper2>
               <BtnWrapper3>
-                <EqualBtn>=</EqualBtn>
+                <EqualBtn onClick={onEqualBtnClick}>=</EqualBtn>
               </BtnWrapper3>
             </Buttons>
           </Panel>
@@ -85,9 +141,11 @@ const Result = styled.div`
     background-color: transparent;
     height: 100%;
     width: 100%;
-    font-size: 10vh;
-    color: #e6e6e6;
+    font-size: 5rem;
+    color: #286fc7;
     border: none;
+    text-align: right;
+    padding-right: 1rem;
   }
 `;
 
@@ -123,7 +181,7 @@ const BtnWrapper3 = styled.div`
   grid-area: 4 / 4 / 6 / 5;
 `;
 
-const EqualBtn = styled.div`
+const EqualBtn = styled.button`
   text-decoration: none;
   cursor: pointer;
   text-align: center;
