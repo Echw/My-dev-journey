@@ -25,8 +25,13 @@ const Calculator = () => {
 
   const onEqualBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const numbers = actualValue.split(action);
-    const firstNumber = parseInt(numbers[0]);
-    const secondNumber = parseInt(numbers[1]);
+    console.log(numbers);
+    if (numbers.length === 1) {
+      setActualValue('0');
+      return;
+    }
+    const firstNumber = parseFloat(numbers[0]);
+    const secondNumber = parseFloat(numbers[1]);
     let result = 0;
     if (action === '+') {
       result = firstNumber + secondNumber;
@@ -68,6 +73,7 @@ const Calculator = () => {
                 id="display"
                 disabled
                 value={actualValue}
+                maxLength={9}
               />
             </Result>
             <Buttons>
@@ -93,7 +99,7 @@ const Calculator = () => {
                 <button onClick={onDigitBtnClick}>9</button>
                 <button onClick={onActionBtnClick}>%</button>
                 <button onClick={onDigitBtnClick}>0</button>
-                <button>.</button>
+                <button onClick={onDigitBtnClick}>.</button>
               </BtnWrapper2>
               <BtnWrapper3>
                 <EqualBtn onClick={onEqualBtnClick}>=</EqualBtn>
