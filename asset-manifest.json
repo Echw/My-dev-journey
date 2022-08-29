@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/devjourney/static/css/main.e6c13ad2.css",
+    "main.js": "/devjourney/static/js/main.974fcfdb.js",
+    "index.html": "/devjourney/index.html",
+    "main.e6c13ad2.css.map": "/devjourney/static/css/main.e6c13ad2.css.map",
+    "main.974fcfdb.js.map": "/devjourney/static/js/main.974fcfdb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.974fcfdb.js"
+  ]
+}
