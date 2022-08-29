@@ -29,7 +29,7 @@ const HarryPotterAPI = () => {
   const [character, setCharacter] = useState<Character | null>(null);
   const [enteredSearch, setEnteredSearch] = useState('');
 
-  const url = 'http://hp-api.herokuapp.com/api/characters';
+  const url = 'https://hp-api.herokuapp.com/api/characters';
 
   useEffect(() => {
     axios.get(url).then((res) => {
