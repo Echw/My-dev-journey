@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import PageLayout from '../components/PageLayout';
 import Title from '../components/Title';
+import { getColorByHouse } from './../helpers/getColorByHouse';
 
 type Character = {
   name: string;
@@ -26,7 +27,7 @@ type Character = {
 
 const HarryPotterAPI = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [character, setCharacter] = useState<Character | null>(null);
+  const [character, setCharacter] = useState<Character | undefined>(undefined);
   const [enteredSearch, setEnteredSearch] = useState('');
 
   const url = 'https://hp-api.herokuapp.com/api/characters';
@@ -47,63 +48,66 @@ const HarryPotterAPI = () => {
     console.log(enteredSearch);
   };
 
+  const searchSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (enteredSearch.trim() === '') {
+      return;
+    }
+    const found = characters.find((char) => char.name.includes(enteredSearch));
+    setCharacter(found);
+  };
+
   if (!character) return <div>No character found</div>;
 
   return (
     <PageLayout>
-      <ThemeProvider theme={theme}>
-        <Wrapper>
-          <Title name="Harry Potter Search" />
-          <Search>
-            <form>
-              <input
-                type="text"
-                name="search"
-                placeholder="Search Character"
-                onChange={searchChangeHandler}
-              />
-              <Btn type="submit">Search</Btn>
-            </form>
-          </Search>
-          <DataWrapper>
-            <InfoWrapper>
-              <h2>{character.name}</h2>
-              <h3>House: {character.house}</h3>
-              <span>Species: {character.species}</span>
-              <span>Gender: {character.gender}</span>
-              <span>Wizard: </span>
-              <span>Ancestry: {character.ancestry}</span>
-              <span>Patronus: {character.patronus}</span>
-              <span>Student/Staff:</span>
-              <span>Date Of Birth: {character.dateOfBirth}</span>
-              <span>Alive:</span>
-            </InfoWrapper>
-            <ImgWandWrapper>
-              <div>
-                <img src={character.image} alt={character.name} />
-              </div>
-              <WandWrapper>
-                <h3>Wand</h3>
-                <span>Wood: {character.wand.wood}</span>
-                <span>Core: {character.wand.core}</span>
-                <span>Length: {character.wand.length}"</span>
-              </WandWrapper>
-            </ImgWandWrapper>
-          </DataWrapper>
-        </Wrapper>{' '}
-      </ThemeProvider>
+      <Wrapper>
+        <Title name="Harry Potter Search" />
+        <Search>
+          <form onSubmit={searchSubmitHandler}>
+            <input
+              type="text"
+              name="search"
+              placeholder="Search Character"
+              onChange={searchChangeHandler}
+            />
+            <Btn type="submit">Search</Btn>
+          </form>
+        </Search>
+        <DataWrapper>
+          <InfoWrapper>
+            <h2>{character.name}</h2>
+            <h3 style={{ color: getColorByHouse(character.house) }}>
+              House: {character.house}
+            </h3>
+            <span>Species: {character.species}</span>
+            <span>Gender: {character.gender}</span>
+            <span>Wizard: </span>
+            <span>Ancestry: {character.ancestry}</span>
+            <span>Patronus: {character.patronus}</span>
+            <span>Student/Staff:</span>
+            <span>Date Of Birth: {character.dateOfBirth}</span>
+            <span>Alive:</span>
+          </InfoWrapper>
+          <ImgWandWrapper>
+            <Img>
+              <img src={character.image} alt={character.name} />
+            </Img>
+            <WandWrapper>
+              <h3>Wand</h3>
+              <span>Wood: {character.wand.wood}</span>
+              <span>Core: {character.wand.core}</span>
+              <span>Length: {character.wand.length}"</span>
+            </WandWrapper>
+          </ImgWandWrapper>
+        </DataWrapper>
+      </Wrapper>
     </PageLayout>
   );
 };
 
 export default HarryPotterAPI;
-
-const theme = {
-  gryfindor: '#a20003',
-  slytherin: '#1A472A',
-  hufflepuff: '#FFD800',
-  ravenclaw: '#0E1A40',
-};
 
 const Wrapper = styled.div`
   display: flex;
@@ -162,14 +166,32 @@ const InfoWrapper = styled.div`
   border-radius: 3rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
 
   h3 {
     margin: 0;
-    color: ${(props) => props.theme.gryfindor};
   }
 `;
+
+const ImgWandWrapper = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const Img = styled.div`
+  height: 15rem;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
 const WandWrapper = styled.div`
   padding: 1rem;
   background-color: white;
@@ -182,11 +204,4 @@ const WandWrapper = styled.div`
   h3 {
     margin: 0;
   }
-`;
-const ImgWandWrapper = styled.div`
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
 `;
