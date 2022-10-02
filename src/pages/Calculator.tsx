@@ -23,7 +23,7 @@ const Calculator = () => {
     setActualValue(actualValue + value);
   };
 
-  const onEqualBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onEqualBtnClick = () => {
     const numbers = actualValue.split(action);
     console.log(numbers);
     if (numbers.length === 1) {
@@ -47,11 +47,11 @@ const Calculator = () => {
     setActualValue(result.toString());
   };
 
-  const onClearBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onClearBtnClick = () => {
     setActualValue('0');
   };
 
-  const onDeleteBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onDeleteBtnClick = () => {
     const newValue = actualValue.slice(0, -1);
     if (newValue === '') {
       setActualValue('0');
@@ -80,10 +80,10 @@ const Calculator = () => {
               <BtnWrapper1>
                 <button onClick={onClearBtnClick}>C</button>
                 <button onClick={onActionBtnClick}>/</button>
-                <button onClick={onActionBtnClick}>x</button>
-                <DeleteBtnWrapper onClick={onDeleteBtnClick}>
-                  <DeleteBtn />
-                </DeleteBtnWrapper>
+                <button onClick={onActionBtnClick}>X</button>
+                <button onClick={onDeleteBtnClick}>
+                  <FaBackspace />
+                </button>
                 <button onClick={onDigitBtnClick}>1</button>
                 <button onClick={onDigitBtnClick}>2</button>
                 <button onClick={onDigitBtnClick}>3</button>
@@ -123,7 +123,7 @@ const Wrapper = styled.div`
 const CalculatorWrapper = styled.div`
   display: grid;
   width: 100vw;
-  height: 100vh;
+
   justify-content: center;
   padding-top: 2rem;
 `;
@@ -170,10 +170,11 @@ const Buttons = styled.section`
     cursor: pointer;
     height: calc((600px * 0.75) / 5);
     width: calc(420px / 4);
-    text-align: center;
-    font-size: 5vh;
+    font-size: 3rem;
     color: #286fc7;
-    border: 0.2rem solid #286fc7;
+    outline: 2px solid #286fc7;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -188,21 +189,5 @@ const BtnWrapper3 = styled.div`
 `;
 
 const EqualBtn = styled.button`
-  text-decoration: none;
-  cursor: pointer;
-  text-align: center;
-  font-size: 5vh;
-  color: #286fc7;
-  border: 0.2rem solid #286fc7;
-  height: 100%;
-  line-height: calc((600px * 0.75) / 3);
-`;
-
-const DeleteBtn = styled(FaBackspace)`
-  margin: 0;
-  padding: 0;
-`;
-
-const DeleteBtnWrapper = styled.button`
-  font-size: 2.6rem !important;
+  height: 100% !important;
 `;
