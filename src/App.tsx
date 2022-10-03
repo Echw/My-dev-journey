@@ -9,7 +9,6 @@ import Calculator from './pages/Calculator';
 
 function App() {
   return (
-    <div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/form" element={<FormPage />} />
@@ -19,7 +18,6 @@ function App() {
         <Route path="/hp" element={<HarryPotterAPI />} />
         <Route path="/calculator" element={<Calculator />} />
       </Routes>
-    </div>
   );
 }
 

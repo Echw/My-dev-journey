@@ -25,7 +25,6 @@ const Calculator = () => {
 
   const onEqualBtnClick = () => {
     const numbers = actualValue.split(action);
-    console.log(numbers);
     if (numbers.length === 1) {
       setActualValue('0');
       return;
@@ -39,7 +38,7 @@ const Calculator = () => {
       result = firstNumber - secondNumber;
     } else if (action === '/') {
       result = firstNumber / secondNumber;
-    } else if (action === 'x') {
+    } else if (action === 'X') {
       result = firstNumber * secondNumber;
     } else if (action === '%') {
       result = (100 * secondNumber) / firstNumber;

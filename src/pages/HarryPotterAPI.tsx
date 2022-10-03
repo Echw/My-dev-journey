@@ -45,7 +45,6 @@ const HarryPotterAPI = () => {
 
   const searchChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredSearch(event.currentTarget.value);
-    console.log(enteredSearch);
   };
 
   const searchSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
